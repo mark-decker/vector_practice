@@ -19,7 +19,11 @@ fn partition_vec(v: &mut [i32]) -> usize {  //pass in mutable slice, return usiz
 
     for j in 0..len - 1 {
         if v[j] <= pivot {
-            v.swap(i,j);  //swap the values
+            //implement my own swap
+            let tmp_val: i32 = v[j];  //don't borrow it!
+            v[j] = v[i];
+            v[i] = tmp_val;
+            //v.swap(i,j);  //swap the values
             i += 1;       //move to next i of slice
         }
     }
@@ -49,7 +53,7 @@ fn main() {
 
     //create vector using vec! macro
     //
-    let mut vec = vec![1, 6, 76, 98, 104, 3, 0, 3, 25, 4, 8, 19];
+    let mut vec = vec![1, -6, 6, 76, 98, -75, 104, 3, 0, 3, 25, 4, 8, 19];
 
     //first we need to sort the vector
     //test partition function
