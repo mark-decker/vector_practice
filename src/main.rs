@@ -95,7 +95,7 @@ fn main() {
 
     //find the max value in the hashmap
     let mut max_count = 0; 
-    for (key, count) in &map {  //use reference
+    for (_, count) in &map {  //use reference
         if *count > max_count {  //must deref
             max_count = *count;
         }
