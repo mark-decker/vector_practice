@@ -29,6 +29,22 @@ fn partition_vec(v: &mut [i32]) -> usize {  //pass in mutable slice, return usiz
     return i;  //return the index we are left with
 }
 
+//quicksort function
+//set the pivot with partition then call quick sort on two subslices
+fn quick_sort(v: &mut [i32]) {  //don't return anything just call recursively
+
+    //ensure we have a valid vector to know when to stop
+    if v.len() <= 1 {
+        return
+    }
+
+    let pivot = partition_vec(&mut v[..]);  //v is already a mutable reference here so no &mut 
+                                            //unless I write it as a slice [..]
+
+    quick_sort(&mut v[0..pivot]);  //start half
+    quick_sort(&mut v[pivot + 1..]); //end half
+}
+
 fn main() {
 
     //create vector using vec! macro
@@ -43,5 +59,20 @@ fn main() {
     for v in &vec {
         println!("{v}");
     }
+
+    quick_sort(&mut vec);
+
+    println!("sould be sorted");
+    for v in &vec {
+        println!("{v}");
+    }
+
+    //now that is is sorted we just find value at middle index
+    let len = vec.len() / 2;
+
+    let median = &vec[len];
+
+    println!("median is {median}");
+
 
 }
